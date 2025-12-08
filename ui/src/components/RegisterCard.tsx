@@ -22,12 +22,11 @@ const RegisterCard: React.FC = () => {
             <option value="admin">Admin</option>
         </select>
     </div>
-    <Button type="button"> Register</Button>
     </form>
 
     <p className= "text-sm text-center mt-4">
         Do you have an account?
-        <Link to ="/login" className="text-blue-500 hover:underline">Log in </Link>
+        <Link to ="/login" className="text-blue-500 hover:underline"> Log in </Link>
     </p>
     </Card>
     );

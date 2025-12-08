@@ -15,3 +15,4 @@ export const login = (email: string, password: string): User => {
     }
     return user;
 };
+
