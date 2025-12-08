@@ -1,7 +1,7 @@
 import React from 'react';
-import { Input } from './ui/Input';
-import { Card } from './ui/Card';
-import { Button } from './ui/Button';
+import  Input  from './Input';
+import   Card from './Card';
+import  Button  from './Button';
 
 const LoginCard: React.FC = () => {
     return(
