@@ -2,6 +2,7 @@ import React from 'react';
 import  Input  from './Input';
 import   Card from './Card';
 import  Button  from './Button';
+import { Link } from "react-router-dom";
 
 const LoginCard: React.FC = () => {
     return(
@@ -13,7 +14,8 @@ const LoginCard: React.FC = () => {
                 <Button type="button">Log In</Button>
             </form>
             <p className="text-sm text-center mt-4">
-                Don't have an account? <a href="/register" className="text-blue-500 hover:underline">Register</a>
+                Don't have an account?
+                <Link to="/register" className="text-blue-500 hover:underline">Register</Link>
             </p>
         </Card>
     );
