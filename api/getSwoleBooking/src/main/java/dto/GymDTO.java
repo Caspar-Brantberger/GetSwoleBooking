@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -14,5 +15,5 @@ import java.util.List;
 public class GymDTO {
     private Long id;
     private String name;
-    private List<AccesOptionDTO> accesOptions;
+    private List<AccesOptionDTO> accesOptions = new ArrayList<>();
 }

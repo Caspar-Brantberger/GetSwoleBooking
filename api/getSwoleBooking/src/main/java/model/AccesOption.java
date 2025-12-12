@@ -1,6 +1,6 @@
 package model;
 
-import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -17,10 +17,12 @@ public class AccesOption {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String type; // Free Day, Free Week, Single Pass
     private Double price;
 
     @ManyToOne
     @JoinColumn(name = "gym_id")
+    @JsonBackReference
     private Gym gym;
 }

@@ -1,5 +1,6 @@
 package model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import model.AccesOption;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -22,7 +24,17 @@ public class Gym {
     private String name;
 
     @OneToMany(mappedBy = "gym", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<AccesOption> accesOptions;
+    @JsonManagedReference
+    private List<AccesOption> accesOptions = new ArrayList<>();
+
+    public void addAccesOption(AccesOption accesOption) {
+        accesOptions.add(accesOption);
+        accesOption.setGym(this);
+    }
+    public void removeAccesOption(AccesOption accesOption) {
+        accesOptions.remove(accesOption);
+        accesOption.setGym(null);
+    }
 
 
 }
