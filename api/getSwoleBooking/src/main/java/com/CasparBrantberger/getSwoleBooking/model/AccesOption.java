@@ -1,4 +1,4 @@
-package model;
+package com.CasparBrantberger.getSwoleBooking.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
@@ -18,8 +18,10 @@ public class AccesOption {
     private Long id;
 
     @Column(nullable = false)
-    private String type; // Free Day, Free Week, Single Pass
+    private String type;// Free Day, Free Week, Single Pass
+    private String description;
     private Double price;
+
 
     @ManyToOne
     @JoinColumn(name = "gym_id")

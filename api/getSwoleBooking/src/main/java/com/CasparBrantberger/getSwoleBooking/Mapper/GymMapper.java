@@ -1,7 +1,7 @@
-package Mapper;
+package com.CasparBrantberger.getSwoleBooking.Mapper;
 
-import dto.GymDTO;
-import model.Gym;
+import com.CasparBrantberger.getSwoleBooking.dto.GymDTO;
+import com.CasparBrantberger.getSwoleBooking.model.Gym;
 
 public class GymMapper {
     public static GymDTO toDTO(Gym gym) {

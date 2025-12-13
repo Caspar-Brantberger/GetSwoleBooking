@@ -1,4 +1,4 @@
-package service;
+package com.CasparBrantberger.getSwoleBooking.service;
 
 import org.springframework.stereotype.Service;
 

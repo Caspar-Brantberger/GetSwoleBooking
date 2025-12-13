@@ -1,15 +1,15 @@
-package service;
+package com.CasparBrantberger.getSwoleBooking.service;
 
-import Mapper.GymMapper;
-import dto.AccesOptionDTO;
-import dto.GymDTO;
+import com.CasparBrantberger.getSwoleBooking.dto.AccesOptionDTO;
+import com.CasparBrantberger.getSwoleBooking.dto.GymDTO;
 import jakarta.persistence.EntityNotFoundException;
-import model.AccesOption;
-import model.Gym;
+import com.CasparBrantberger.getSwoleBooking.model.AccesOption;
+import com.CasparBrantberger.getSwoleBooking.model.Gym;
 import org.springframework.stereotype.Service;
-import repository.AccesOptionRepository;
-import repository.GymRepository;
+import com.CasparBrantberger.getSwoleBooking.repository.AccesOptionRepository;
+import com.CasparBrantberger.getSwoleBooking.repository.GymRepository;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -32,10 +32,23 @@ public class GymService {
         dto.setName(gym.getName());
         dto.setAccesOptions(
                 gym.getAccesOptions().stream()
-                        .map(opt -> new AccesOptionDTO(opt.getId(), opt.getType(), opt.getPrice()))
+                        .map(opt -> new AccesOptionDTO(opt.getId(), opt.getType(),opt.getDescription() ,opt.getPrice()))
                         .collect(Collectors.toList())
         );
         return dto;
+    }
+    public List<GymDTO> getAllGyms(){
+        return gymRepository.findAll().stream().map(gym  -> {
+          GymDTO dto = new GymDTO();
+          dto.setId(gym.getId());
+          dto.setName(gym.getName());
+          dto.setAccesOptions(gym.getAccesOptions().stream()
+                  .map(opt -> new AccesOptionDTO(opt.getId(), opt.getType(),opt.getDescription() ,opt.getPrice()))
+                  .collect(Collectors.toList())
+          );
+          return dto;
+        })
+                .collect(Collectors.toList());
     }
 
     public GymDTO createGym(GymDTO gymDTO) {
@@ -60,7 +73,7 @@ public class GymService {
         dto.setId(saved.getId());
         dto.setName(saved.getName());
         dto.setAccesOptions(saved.getAccesOptions().stream()
-                .map(opt -> new AccesOptionDTO(opt.getId(), opt.getType(), opt.getPrice()))
+                .map(opt -> new AccesOptionDTO(opt.getId(), opt.getType(),opt.getDescription() ,opt.getPrice()))
                 .collect(Collectors.toList())
         );
         return dto;
@@ -79,24 +92,41 @@ public class GymService {
 
         option.setType(accesOptionDTO.getType());
         option.setPrice(accesOptionDTO.getPrice());
+        option.setDescription(accesOptionDTO.getDescription());
         option.setGym(gym);
 
         AccesOption saved = accesOptionRepository.save(option);
 
-        return new AccesOptionDTO(saved.getId(), saved.getType(), saved.getPrice());
+        return new AccesOptionDTO(
+                saved.getId(),
+                saved.getType(),
+                saved.getDescription(),
+                saved.getPrice()
+        );
     }
     public AccesOptionDTO updateAccesOption(Long gymId, Long accesOptionId, AccesOptionDTO accesOptionDTO) {
         AccesOption option = accesOptionRepository.findById(accesOptionId).orElseThrow(() -> new EntityNotFoundException("AccesOption not found for id:" + accesOptionId));
         option.setType(accesOptionDTO.getType());
         option.setPrice(accesOptionDTO.getPrice());
+        option.setDescription(accesOptionDTO.getDescription());
         AccesOption saved = accesOptionRepository.save(option);
 
-        return new AccesOptionDTO(saved.getId(), saved.getType(), saved.getPrice());
+        return new AccesOptionDTO(
+                saved.getId(),
+                saved.getType(),
+                saved.getDescription(),
+                saved.getPrice()
+        );
     }
 
     public AccesOptionDTO getAccesOption(Long gymId, Long accesOptionId) {
         AccesOption option = accesOptionRepository.findById(accesOptionId).orElseThrow(() -> new EntityNotFoundException("AccesOption not found for id:" + accesOptionId));
-        return new AccesOptionDTO(option.getId(), option.getType(), option.getPrice());
+        return new AccesOptionDTO(option.getId(), option.getType(), option.getDescription(), option.getPrice());
+    }
+
+    public List<AccesOptionDTO> getAllAccesOption(){
+        return accesOptionRepository.findAll().stream().map(option -> new AccesOptionDTO(option.getId(),
+                option.getType(),option.getDescription(), option.getPrice())).collect(Collectors.toList());
     }
 
     public void deleteAccesOptionFromGym(Long gymId, Long accesOptionId) {
