@@ -1,4 +1,4 @@
 package com.CasparBrantberger.getSwoleBooking.controller;
 
-public class BookingController {
+public class GymAccesController {
 }

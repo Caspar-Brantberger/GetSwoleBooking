@@ -1,4 +1,4 @@
 package com.CasparBrantberger.getSwoleBooking.model;
 
-public class Booking {
+public class GymAcces {
 }
